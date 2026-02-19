@@ -1,0 +1,23 @@
+# =============================================================================
+# File: spring-service.yaml
+# Purpose: Exposes the Spring Boot app externally (NodePort for Minikube/local)
+# Namespace: devops
+# =============================================================================
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-service
+  namespace: devops
+  labels:
+    app: spring-app
+spec:
+  selector:
+    app: spring-app
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: http
+      nodePort: 30080 # Optional: Kubernetes auto-assigns if omitted
+  type: NodePort
