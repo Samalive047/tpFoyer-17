@@ -32,7 +32,7 @@ spec:
           imagePullPolicy: Always # or IfNotPresent
 
           ports:
-            - containerPort: 8080
+            - containerPort: 8082
               name: http
 
           envFrom:
@@ -51,14 +51,14 @@ spec:
 
           readinessProbe:
             httpGet:
-              path: /actuator/health/readiness # or /health, /, etc.
-              port: 8080
-            initialDelaySeconds: 30
+              path: /actuator/health # or /health, /, etc.
+              port: 8082
+            initialDelaySeconds: 60
             periodSeconds: 10
 
           livenessProbe:
             httpGet:
-              path: /actuator/health/liveness
-              port: 8080
-            initialDelaySeconds: 60
+              path: /actuator/health
+              port: 8082
+            initialDelaySeconds: 120
             periodSeconds: 10
